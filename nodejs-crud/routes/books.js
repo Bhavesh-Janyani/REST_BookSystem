@@ -86,14 +86,7 @@ router.get('/edit/(:id)', function(req, res, next) {
 
     dbConn.query('SELECT * FROM books WHERE id = ' + id, function(err, rows, fields) {
         if(err) throw err
-
-        // if user not found
-        if (rows.length <= 0) {
-            req.flash('error', 'Book not found with id = ' + id)
-            res.redirect('/books')
-        }
-        // if book found
-        else {
+        
             // render to edit.ejs
             res.render('books/edit', {
                 title: 'Edit Book',
@@ -102,7 +95,6 @@ router.get('/edit/(:id)', function(req, res, next) {
                 author: rows[0].author,
                 description: rows[0].description
             })
-        }
     })
 })
 
